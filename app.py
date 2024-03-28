@@ -79,7 +79,7 @@ def welcome():
     return """<div>
     <h1>Welcome to the Cyberbullying Detection API!</h1>
     <p>This API allows you to detect cyberbullying in text. Send a POST request to /detect with the 'user_input' parameter to analyze text.</p>
-    <p>Check the documentation for more details on how to use the API.</p>
+    <p>Check the documentation for more details on how to use the API</p>
     </div>"""
 
 @app.route('/detect', methods=['POST'])
