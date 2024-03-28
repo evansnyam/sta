@@ -17,8 +17,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   statusSubtext.innerText = "Analysis Complete";
   const h1 = document.createElement("h1");
   h1.innerText = request.isOffensive
-    ? "The text is offensive"
-    : "The text is not offensive";
+    ? "The text is safe"
+    : "The text is unsafe";
   resultContainer.appendChild(h1);
 
   const ul = document.createElement("ul");
