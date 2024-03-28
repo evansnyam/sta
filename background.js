@@ -97,7 +97,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "sendTextToAPI") {
     const formData = new FormData();
     formData.append("user_input", message.text);
-    fetch("https://detection-main-production.up.railway.app/detect", {
+    fetch("https://cyber-bullying-detector-e7a23ed33bf8.herokuapp.com/detect", {
       method: "POST",
       body: formData,
     })
