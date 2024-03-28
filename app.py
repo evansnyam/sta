@@ -128,7 +128,7 @@ def detect():
                     "offensive": True,
                     "offensive_reasons": [f"Detected offensive words: {format_offensive_words(offensive_words)}"],
                     "multi_class_result": f"Multi-Class Predicted Class: {predicted_class}",
-                    "context_analysis": analyze_context(user_input)  # Analyze context using OpenAI
+                    # "context_analysis": analyze_context(user_input)  # Analyze context using OpenAI
                 }
             }
         else:
