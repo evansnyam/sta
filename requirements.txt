@@ -15,4 +15,3 @@ gunicorn
 waitress
 flask-cors
 nltk
-openai

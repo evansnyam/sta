@@ -8,12 +8,10 @@ import numpy as np
 import joblib
 import os
 
-import openai
 
 nltk.download('stopwords')
 nltk.download('wordnet')
 app = Flask(__name__)
-openai.api_key = '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'
 
 label_encoder = joblib.load('label_encoder.joblib')
 model_pipeline = joblib.load('sgd_classifier_model.joblib')
@@ -87,21 +85,6 @@ def welcome():
 # Set up your OpenAI API key
 
 # Function to analyze context using OpenAI
-def analyze_context(text):
-    try:
-        # Call OpenAI's API to analyze context
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=text,
-            max_tokens=100
-        )
-
-        # Extract the generated text from OpenAI's response
-        generated_text = response.choices[0].text.strip()
-
-        return generated_text
-    except Exception as e:
-        return None
 
 # Update your detection endpoint to incorporate OpenAI analysis
 @app.route('/detect', methods=['POST'])
@@ -128,7 +111,6 @@ def detect():
                     "offensive": True,
                     "offensive_reasons": [f"Detected offensive words: {format_offensive_words(offensive_words)}"],
                     "multi_class_result": f"Multi-Class Predicted Class: {predicted_class}",
-                    # "context_analysis": analyze_context(user_input)  # Analyze context using OpenAI
                 }
             }
         else:
