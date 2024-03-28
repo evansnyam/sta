@@ -107,45 +107,50 @@ def analyze_context(text):
 @app.route('/detect', methods=['POST'])
 def detect():
     user_input = request.form['user_input']
-    print(user_input)
+    try:
 
-    # Make binary prediction and check for offensive words
-    binary_result, offensive_words = binary_cyberbullying_detection(user_input)
+        print(user_input)
+        # Make binary prediction and check for offensive words
+        binary_result, offensive_words = binary_cyberbullying_detection(user_input)
 
-    # Make multi-class prediction
-    multi_class_result = multi_class_cyberbullying_detection(user_input)
-    predicted_class, prediction_probs = multi_class_result
-    print(predicted_class)
+        # Make multi-class prediction
+        multi_class_result = multi_class_cyberbullying_detection(user_input)
+        predicted_class, prediction_probs = multi_class_result
+        print(predicted_class)
 
-    result = None
+        result = None
 
-    if binary_result == 1:
-        # unsafe result
-        result = {
-            "message": "This text is unsafe.",
-            "details": {
-                "offensive": True,
-                "offensive_reasons": [f"Detected offensive words: {format_offensive_words(offensive_words)}"],
-                "multi_class_result": f"Multi-Class Predicted Class: {predicted_class}",
-                "context_analysis": analyze_context(user_input)  # Analyze context using OpenAI
+        if binary_result == 1:
+            # unsafe result
+            result = {
+                "message": "This text is unsafe.",
+                "details": {
+                    "offensive": True,
+                    "offensive_reasons": [f"Detected offensive words: {format_offensive_words(offensive_words)}"],
+                    "multi_class_result": f"Multi-Class Predicted Class: {predicted_class}",
+                    "context_analysis": analyze_context(user_input)  # Analyze context using OpenAI
+                }
             }
-        }
-    else:
-        # safe
-        result = {
-            "message": "This text is safe.",
-            "details": {
-                "offensive": False,
-                "offensive_reasons": [],
-                "multi_class_result": "",
-                "context_analysis": ""  # No context analysis for safe text
+        else:
+            # safe
+            result = {
+                "message": "This text is safe.",
+                "details": {
+                    "offensive": False,
+                    "offensive_reasons": [],
+                    "multi_class_result": "",
+                    "context_analysis": ""  # No context analysis for safe text
+                }
             }
-        }
-        if len(offensive_words) > 0:
-            result["details"]["offensive_reasons"] = [f"Detected offensive words: {format_offensive_words(offensive_words)}"]
+            if len(offensive_words) > 0:
+                result["details"]["offensive_reasons"] = [f"Detected offensive words: {format_offensive_words(offensive_words)}"]
 
-    print(result)
-    return jsonify(result)
+        print(result)
+        return jsonify(result)
+    except Exception as e:
+        print(user_input)
+        print(str(e))
+        return jsonify({"error": str(e), "input": user_input})
 
 
 if __name__ == "__main__":
