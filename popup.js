@@ -1,6 +1,12 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log("Received request in content JS:", request);
   const resultContainer = document.getElementById("result-container");
+  // delete all children of resultContainer
+  if (resultContainer) {
+    while (resultContainer.firstChild) {
+      resultContainer.removeChild(resultContainer.firstChild);
+    }
+  }
   const h1 = document.createElement("h1");
   h1.innerText = request.isOffensive
     ? "The text is offensive"
