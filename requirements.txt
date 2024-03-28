@@ -1,0 +1,17 @@
+numpy
+pandas
+statsmodels
+Pillow
+nltk
+scikit-learn==1.2.2
+joblib==1.3.2
+scipy
+threadpoolctl
+google-trans-new
+tweepy==3.10.0
+tornado
+flask
+gunicorn
+waitress
+flask-cors
+nltk
