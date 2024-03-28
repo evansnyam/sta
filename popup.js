@@ -7,6 +7,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       resultContainer.removeChild(resultContainer.firstChild);
     }
   }
+  // change opacity of resultContainer to 1
+  resultContainer.style.opacity = 1;
+  // hide spinner-get by id
+  const spinner = document.getElementById("spinner");
+  spinner.style.display = "none";
+  // update text on element id status-subtext to "Analysis Complete"
+  const statusSubtext = document.getElementById("status-subtext");
+  statusSubtext.innerText = "Analysis Complete";
   const h1 = document.createElement("h1");
   h1.innerText = request.isOffensive
     ? "The text is offensive"
