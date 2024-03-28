@@ -14,7 +14,7 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
     formData.append("user_input", info.selectionText);
 
     const response = await fetch(
-      "https://detection-main-production.up.railway.app/detect",
+      "https://cyber-bullying-detector-e7a23ed33bf8.herokuapp.com/detect",
       {
         method: "POST",
         body: formData,
