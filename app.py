@@ -107,6 +107,7 @@ def analyze_context(text):
 @app.route('/detect', methods=['POST'])
 def detect():
     user_input = request.form['user_input']
+    print(user_input)
 
     # Make binary prediction and check for offensive words
     binary_result, offensive_words = binary_cyberbullying_detection(user_input)
