@@ -76,13 +76,6 @@ function showPopUp(data) {
                       <p style="font-weight: 600; margin-top: 2rem;">Reasons:</p>
                       ${reasonsList}
                       <p style="font-weight: 600; margin-top: 2rem;">This content may contain elements that are offensive to users':</p>
-                      // Assuming data.details.multi_class_result contains "Multi-Class Predicted Class: ethnicity"
-                      // Split the string by ":" and get the second part (the predicted class)
-                      const predictedClass = data.details.multi_class_result.split(":")[1].trim();
-
-                      // Output the predicted class
-                      <span>${predictedClass}</span>
-
                       <span>${data.details.multi_class_result}</span>
 
                       <p style="font-weight: 600; margin-top: 2rem; font-size: 1.5rem">You can close this tab</p>
