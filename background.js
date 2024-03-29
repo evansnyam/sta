@@ -71,7 +71,7 @@ function showPopUp(data) {
           document.body.insertAdjacentHTML(
             "afterbegin",
             `<div id="alert-offensive" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.9); z-index: 9999;">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #3498db; color:white; padding: 20px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); border-radius: 10px; width: 700px;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #34495e; color:white; padding: 20px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); border-radius: 10px; width: 700px;">
                       <h2 style="margin-bottom: 10px;font-size:2rem; font-weight: bold;">Offensive Content Found on This Page!</h2>
                       <p style="font-weight: 600; margin-top: 2rem;">Reasons:</p>
                       ${reasonsList}
