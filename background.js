@@ -74,8 +74,13 @@ function showPopUp(data) {
                     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #34495e; color:white; padding: 20px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); border-radius: 10px; width: 700px;">
                       <h2 style="margin-bottom: 10px;font-size:2rem; font-weight: bold;">Offensive Content Found on This Page!</h2>
                       <p style="font-weight: 600; margin-top: 2rem;">Reasons:</p>
+                      <details>
+                      <summary>See offensive words</summary>
                       ${reasonsList}
-                      <p style="font-weight: 600; margin-top: 2rem;">This content may contain elements that are offensive to users' <span style="font-weight: normal">${data.details.multi_class_result.split(":")[1]}</span></p>
+                      <p style="font-weight: 600; margin-top: 2rem;">This content may contain elements that are offensive to users' <span style="font-weight: normal">${
+                        data.details.multi_class_result.split(":")[1]
+                      }</span></p>
+                      </details>
 
                       <p style="font-weight: 600; margin-top: 2rem; font-size: 1.5rem">You can close this tab</p>
 
