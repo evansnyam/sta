@@ -75,7 +75,7 @@ function showPopUp(data) {
                       <h2 style="margin-bottom: 10px;font-size:2rem; font-weight: bold;">Offensive Content Found on This Page!</h2>
                       <p style="font-weight: 600; margin-top: 2rem;">Reasons:</p>
                       ${reasonsList}
-                      <p style="font-weight: 600; margin-top: 2rem;">This content may be offensive due to its association with the following:</p>
+                      <p style="font-weight: 600; margin-top: 2rem;">This content may contain elements that are offensive to users':</p>
                       <span>${data.details.multi_class_result}</span>
 
                       <p style="font-weight: 600; margin-top: 2rem; font-size: 1.5rem">You can close this tab</p>
