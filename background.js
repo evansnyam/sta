@@ -76,7 +76,7 @@ function showPopUp(data) {
                       <p style="font-weight: 600; margin-top: 2rem;">Reasons:</p>
                       ${reasonsList}
                       <p style="font-weight: 600; margin-top: 2rem;">This content may contain elements that are offensive to users':</p>
-                      <span>${data.details.multi_class_result}</span>
+                      <span>${data.details.multi_class_result.split(":")[1]}</span>
 
                       <p style="font-weight: 600; margin-top: 2rem; font-size: 1.5rem">You can close this tab</p>
 
