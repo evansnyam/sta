@@ -14,7 +14,7 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
     formData.append("user_input", info.selectionText);
 
     const response = await fetch(
-      "https://cyber-bullying-detector-e7a23ed33bf8.herokuapp.com/detect",
+      "https://mxwnpvfgjy2vbmvgvrfrnh.streamlit.app/detect",
       {
         method: "POST",
         body: formData,
@@ -101,7 +101,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "sendTextToAPI") {
     const formData = new FormData();
     formData.append("user_input", message.text);
-    fetch("https://cyber-bullying-detector-e7a23ed33bf8.herokuapp.com/detect", {
+    fetch("https://mxwnpvfgjy2vbmvgvrfrnh.streamlit.app/detect", {
       method: "POST",
       body: formData,
     })
