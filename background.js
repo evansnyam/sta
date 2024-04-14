@@ -48,7 +48,7 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
         multiClass,
       });
       console.log({ resp });
-    }, 30000); // Increase timeout to 10 seconds
+    }, 3000); // Increase timeout to 10 seconds
   }
 });
 
