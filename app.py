@@ -22,6 +22,8 @@ sgd_classifier = joblib.load('sgd_classifier_model.joblib')
 # Load the logo image
 logo = Image.open('logo.png')
 
+
+
 # Function to clean and preprocess text
 def preprocess_text(text):
     text = re.sub(r'http\S+|www\S+|@\S+|#\S+|[^A-Za-z\s]', '', text)
@@ -31,7 +33,14 @@ def preprocess_text(text):
     tokens = [lemmatizer.lemmatize(word) for word in text.split() if word not in stop_words]
     return ' '.join(tokens)
 
-# Function for binary cyberbullying detection
+
+
+
+
+
+
+
+
 def binary_cyberbullying_detection(text):
     try:
         # Preprocess the input text
@@ -49,6 +58,20 @@ def binary_cyberbullying_detection(text):
         return prediction[0], offending_words
     except Exception as e:
         return None, None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Function for multi-class cyberbullying detection
 def multi_class_cyberbullying_detection(text):
@@ -69,6 +92,16 @@ def multi_class_cyberbullying_detection(text):
     except Exception as e:
         return None
 
+
+
+
+
+
+
+
+
+
+
 def format_offensive_words(offensive_words):
     return ', '.join(offensive_words)
 
@@ -82,11 +115,8 @@ def welcome():
 
 @app.route('/detect', methods=['POST'])
 
-# Set up your OpenAI API key
 
-# Function to analyze context using OpenAI
 
-# Update your detection endpoint to incorporate OpenAI analysis
 @app.route('/detect', methods=['POST'])
 def detect():
     user_input = request.form['user_input']
@@ -133,6 +163,13 @@ def detect():
         print(user_input)
         print(str(e))
         return jsonify({"error": str(e), "input": user_input})
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=os.getenv("PORT", default=33507), debug=True, request_timeout=3)  # Set request timeout to 30 seconds
