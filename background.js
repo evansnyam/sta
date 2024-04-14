@@ -35,6 +35,7 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
       left: 100,
     });
 
+    // Increase the timeout to wait for the server response
     setTimeout(async () => {
       const [tab] = await chrome.tabs.query({
         active: true,
@@ -47,7 +48,7 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
         multiClass,
       });
       console.log({ resp });
-    }, 3000);
+    }, 30000); // Increase timeout to 10 seconds
   }
 });
 
