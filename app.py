@@ -135,5 +135,5 @@ def detect():
         return jsonify({"error": str(e), "input": user_input})
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=os.getenv("PORT", default=33507), debug=True, request_timeout=30)  # Set request timeout to 30 seconds
+    app.run(host='0.0.0.0', port=os.getenv("PORT", default=33507), debug=True, request_timeout=3)  # Set request timeout to 30 seconds
 
