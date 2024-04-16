@@ -26,23 +26,13 @@ logo = Image.open('logo.png')
 
 # Function to clean and preprocess text
 def preprocess_text(text):
-    # Remove URLs
-    text = re.sub(r'http\S+|www\S+|@\S+|#\S+', '', text)
-    
-    # Lowercase the text
+    text = re.sub(r'http\S+|www\S+|@\S+|#\S+|[^A-Za-z\s]', '', text)
     text = text.lower()
-    
-    # Define stopwords
     stop_words = set(stopwords.words('english'))
-    
-    # Initialize lemmatizer
     lemmatizer = WordNetLemmatizer()
-    
-    # Tokenize the text and lemmatize each word, excluding stopwords
     tokens = [lemmatizer.lemmatize(word) for word in text.split() if word not in stop_words]
-    
-    # Join the tokens back into a string
     return ' '.join(tokens)
+
 
 
 
@@ -131,40 +121,28 @@ def welcome():
 def detect():
     user_input = request.form['user_input']
     try:
+
+        print(user_input)
         # Make binary prediction and check for offensive words
         binary_result, offensive_words = binary_cyberbullying_detection(user_input)
 
         # Make multi-class prediction
         multi_class_result = multi_class_cyberbullying_detection(user_input)
         predicted_class, prediction_probs = multi_class_result
+        print(predicted_class)
 
         result = None
 
-        # Count unique offensive words
-        unique_offensive_words = set(offensive_words)
-
-        print("Unique offensive words:", unique_offensive_words)  # Debug print
-
         if binary_result == 1:
-            # Check if there are more than four different offensive words
-            if len(unique_offensive_words) > 4:
-                result = {
-                    "message": "This text is unsafe due to a lot of offensive words.",
-                    "details": {
-                        "offensive": True,
-                        "offensive_reasons": [f"Detected offensive words: {format_offensive_words(offensive_words)}"],
-                        "multi_class_result": f"Multi-Class Predicted Class: {predicted_class}",
-                    }
+            # unsafe result
+            result = {
+                "message": "This text is unsafe.",
+                "details": {
+                    "offensive": True,
+                    "offensive_reasons": [f"Detected offensive words: {format_offensive_words(offensive_words)}"],
+                    "multi_class_result": f"Multi-Class Predicted Class: {predicted_class}",
                 }
-            else:
-                result = {
-                    "message": "This text is unsafe.",
-                    "details": {
-                        "offensive": True,
-                        "offensive_reasons": [f"Detected offensive words: {format_offensive_words(offensive_words)}"],
-                        "multi_class_result": f"Multi-Class Predicted Class: {predicted_class}",
-                    }
-                }
+            }
         else:
             # safe
             result = {
@@ -176,12 +154,19 @@ def detect():
                     "context_analysis": ""  # No context analysis for safe text
                 }
             }
-            if len(unique_offensive_words) > 0:  # Check for any offensive words
+            if len(offensive_words) > 0:
                 result["details"]["offensive_reasons"] = [f"Detected offensive words: {format_offensive_words(offensive_words)}"]
 
+        print(result)
         return jsonify(result)
     except Exception as e:
+        print(user_input)
+        print(str(e))
         return jsonify({"error": str(e), "input": user_input})
+
+
+
+
 
 
 
