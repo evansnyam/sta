@@ -140,8 +140,9 @@ def detect():
 
         result = None
 
-        print("Offensive words:", offensive_words)  # Debug print
-        unique_offensive_words = set(offensive_words)  # Convert to set to get unique words
+        # Count unique offensive words
+        unique_offensive_words = set(offensive_words)
+
         print("Unique offensive words:", unique_offensive_words)  # Debug print
 
         if binary_result == 1:
@@ -175,14 +176,12 @@ def detect():
                     "context_analysis": ""  # No context analysis for safe text
                 }
             }
-            if len(offensive_words) > 0:
+            if len(unique_offensive_words) > 0:  # Check for any offensive words
                 result["details"]["offensive_reasons"] = [f"Detected offensive words: {format_offensive_words(offensive_words)}"]
 
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e), "input": user_input})
-
-
 
 
 
