@@ -140,9 +140,12 @@ def detect():
 
         result = None
 
+        print("Offensive words:", offensive_words)  # Debug print
+        unique_offensive_words = set(offensive_words)  # Convert to set to get unique words
+        print("Unique offensive words:", unique_offensive_words)  # Debug print
+
         if binary_result == 1:
             # Check if there are more than four different offensive words
-            unique_offensive_words = set(offensive_words)
             if len(unique_offensive_words) > 4:
                 result = {
                     "message": "This text is unsafe due to a lot of offensive words.",
@@ -178,9 +181,6 @@ def detect():
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e), "input": user_input})
-
-
-
 
 
 
