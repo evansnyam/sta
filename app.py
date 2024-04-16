@@ -26,13 +26,23 @@ logo = Image.open('logo.png')
 
 # Function to clean and preprocess text
 def preprocess_text(text):
-    text = re.sub(r'http\S+|www\S+|@\S+|#\S+|[^A-Za-z\s]', '', text)
+    # Remove URLs
+    text = re.sub(r'http\S+|www\S+|@\S+|#\S+', '', text)
+    
+    # Lowercase the text
     text = text.lower()
+    
+    # Define stopwords
     stop_words = set(stopwords.words('english'))
+    
+    # Initialize lemmatizer
     lemmatizer = WordNetLemmatizer()
+    
+    # Tokenize the text and lemmatize each word, excluding stopwords
     tokens = [lemmatizer.lemmatize(word) for word in text.split() if word not in stop_words]
+    
+    # Join the tokens back into a string
     return ' '.join(tokens)
-
 
 
 
