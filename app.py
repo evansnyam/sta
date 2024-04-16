@@ -121,28 +121,36 @@ def welcome():
 def detect():
     user_input = request.form['user_input']
     try:
-
-        print(user_input)
         # Make binary prediction and check for offensive words
         binary_result, offensive_words = binary_cyberbullying_detection(user_input)
 
         # Make multi-class prediction
         multi_class_result = multi_class_cyberbullying_detection(user_input)
         predicted_class, prediction_probs = multi_class_result
-        print(predicted_class)
 
         result = None
 
         if binary_result == 1:
-            # unsafe result
-            result = {
-                "message": "This text is unsafe.",
-                "details": {
-                    "offensive": True,
-                    "offensive_reasons": [f"Detected offensive words: {format_offensive_words(offensive_words)}"],
-                    "multi_class_result": f"Multi-Class Predicted Class: {predicted_class}",
+            # Check if there are more than four different offensive words
+            unique_offensive_words = set(offensive_words)
+            if len(unique_offensive_words) > 4:
+                result = {
+                    "message": "This text is unsafe due to a lot of offensive words.",
+                    "details": {
+                        "offensive": True,
+                        "offensive_reasons": [f"Detected offensive words: {format_offensive_words(offensive_words)}"],
+                        "multi_class_result": f"Multi-Class Predicted Class: {predicted_class}",
+                    }
                 }
-            }
+            else:
+                result = {
+                    "message": "This text is unsafe.",
+                    "details": {
+                        "offensive": True,
+                        "offensive_reasons": [f"Detected offensive words: {format_offensive_words(offensive_words)}"],
+                        "multi_class_result": f"Multi-Class Predicted Class: {predicted_class}",
+                    }
+                }
         else:
             # safe
             result = {
@@ -157,12 +165,10 @@ def detect():
             if len(offensive_words) > 0:
                 result["details"]["offensive_reasons"] = [f"Detected offensive words: {format_offensive_words(offensive_words)}"]
 
-        print(result)
         return jsonify(result)
     except Exception as e:
-        print(user_input)
-        print(str(e))
         return jsonify({"error": str(e), "input": user_input})
+
 
 
 
